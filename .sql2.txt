@@ -1,0 +1,262 @@
+ use e_commerce;
+Database changed
+mysql> show tables;
++----------------------+
+| Tables_in_e_commerce |
++----------------------+
+| customer             |
+| demo                 |
+| product              |
++----------------------+
+3 rows in set (0.01 sec)
+
+mysql> select * from customer;
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+-------+---------+
+| Customer_ID | customer_name | city   | email_id        | address      | phone_no   | pincode | bill_no | state | country |
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+-------+---------+
+| c101        | sushant       | panvel | sus@gmail.com   | khandacolony | 8591358636 |  410206 |       0 |       |         |
+| c102        | harsh         | panvel | harsh@gmail.com | khandacolony | 6451395265 |  410206 |       0 |       |         |
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+-------+---------+
+2 rows in set (0.01 sec)
+
+mysql> select * from demo;
+Empty set (0.00 sec)
+
+mysql> select * from product;
+Empty set (0.01 sec)
+
+mysql> update customer set phone_no = '7977054627' where Customer_ID = 'c101';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer;
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+-------+---------+
+| Customer_ID | customer_name | city   | email_id        | address      | phone_no   | pincode | bill_no | state | country |
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+-------+---------+
+| c101        | sushant       | panvel | sus@gmail.com   | khandacolony | 7977054627 |  410206 |       0 |       |         |
+| c102        | harsh         | panvel | harsh@gmail.com | khandacolony | 6451395265 |  410206 |       0 |       |         |
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> update customer set state = 'Raigad' where Customer_ID = 'c101';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer;
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city   | email_id        | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+--------+---------+
+| c101        | sushant       | panvel | sus@gmail.com   | khandacolony | 7977054627 |  410206 |       0 | Raigad |         |
+| c102        | harsh         | panvel | harsh@gmail.com | khandacolony | 6451395265 |  410206 |       0 |        |         |
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> insert into customer values('c103', 'chirag', 'panvel', 'chirag@gmail.com', 'kc', '5468795234', '410206', '10', 'NM', 'IndiA');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from customer;
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city   | email_id         | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+| c101        | sushant       | panvel | sus@gmail.com    | khandacolony | 7977054627 |  410206 |       0 | Raigad |         |
+| c102        | harsh         | panvel | harsh@gmail.com  | khandacolony | 6451395265 |  410206 |       0 |        |         |
+| c103        | chirag        | panvel | chirag@gmail.com | kc           | 5468795234 |  410206 |      10 | NM     | IndiA   |
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer where customer_name like '%nt';
++-------------+---------------+--------+---------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city   | email_id      | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+--------+---------------+--------------+------------+---------+---------+--------+---------+
+| c101        | sushant       | panvel | sus@gmail.com | khandacolony | 7977054627 |  410206 |       0 | Raigad |         |
++-------------+---------------+--------+---------------+--------------+------------+---------+---------+--------+---------+
+1 row in set (0.01 sec)
+
+mysql> select * from customer where customer_name like '%ars%';
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+-------+---------+
+| Customer_ID | customer_name | city   | email_id        | address      | phone_no   | pincode | bill_no | state | country |
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+-------+---------+
+| c102        | harsh         | panvel | harsh@gmail.com | khandacolony | 6451395265 |  410206 |       0 |       |         |
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer where city like '%vel';
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city   | email_id         | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+| c101        | sushant       | panvel | sus@gmail.com    | khandacolony | 7977054627 |  410206 |       0 | Raigad |         |
+| c102        | harsh         | panvel | harsh@gmail.com  | khandacolony | 6451395265 |  410206 |       0 |        |         |
+| c103        | chirag        | panvel | chirag@gmail.com | kc           | 5468795234 |  410206 |      10 | NM     | IndiA   |
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> select * from customer where city like 'p_____';
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city   | email_id         | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+| c101        | sushant       | panvel | sus@gmail.com    | khandacolony | 7977054627 |  410206 |       0 | Raigad |         |
+| c102        | harsh         | panvel | harsh@gmail.com  | khandacolony | 6451395265 |  410206 |       0 |        |         |
+| c103        | chirag        | panvel | chirag@gmail.com | kc           | 5468795234 |  410206 |      10 | NM     | IndiA   |
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql> insert into customer values('c104', 'aryan', 'pen', 'aryan@gmail.com', 'belavli', '6459154365', '410205','0','Raigad','Indai'), ( 'c105', 'aditya', 'rasayani', 'aditya@gmail.com', 'mohopada', '4563236546', '410205','0','Raigad','INdia');
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from customer;
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city     | email_id         | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+| c101        | sushant       | panvel   | sus@gmail.com    | khandacolony | 7977054627 |  410206 |       0 | Raigad |         |
+| c102        | harsh         | panvel   | harsh@gmail.com  | khandacolony | 6451395265 |  410206 |       0 |        |         |
+| c103        | chirag        | panvel   | chirag@gmail.com | kc           | 5468795234 |  410206 |      10 | NM     | IndiA   |
+| c104        | aryan         | pen      | aryan@gmail.com  | belavli      | 6459154365 |  410205 |       0 | Raigad | Indai   |
+| c105        | aditya        | rasayani | aditya@gmail.com | mohopada     | 4563236546 |  410205 |       0 | Raigad | INdia   |
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+5 rows in set (0.00 sec)
+
+mysql> update customer set country='USA' where (Customer_ID = 'c101');
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update customer set country='USA' where Customer_ID = 'c102';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from customer;
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city     | email_id         | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+| c101        | sushant       | panvel   | sus@gmail.com    | khandacolony | 7977054627 |  410206 |       0 | Raigad | USA     |
+| c102        | harsh         | panvel   | harsh@gmail.com  | khandacolony | 6451395265 |  410206 |       0 |        | USA     |
+| c103        | chirag        | panvel   | chirag@gmail.com | kc           | 5468795234 |  410206 |      10 | NM     | IndiA   |
+| c104        | aryan         | pen      | aryan@gmail.com  | belavli      | 6459154365 |  410205 |       0 | Raigad | Indai   |
+| c105        | aditya        | rasayani | aditya@gmail.com | mohopada     | 4563236546 |  410205 |       0 | Raigad | INdia   |
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select * from customer limit 2;
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city   | email_id        | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+--------+---------+
+| c101        | sushant       | panvel | sus@gmail.com   | khandacolony | 7977054627 |  410206 |       0 | Raigad | USA     |
+| c102        | harsh         | panvel | harsh@gmail.com | khandacolony | 6451395265 |  410206 |       0 |        | USA     |
++-------------+---------------+--------+-----------------+--------------+------------+---------+---------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select distinct city from customer;
++----------+
+| city     |
++----------+
+| panvel   |
+| pen      |
+| rasayani |
++----------+
+3 rows in set (0.01 sec)
+
+mysql> desc product;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| product_id     | varchar(10) | NO   | PRI | NULL    |       |
+| product_name   | varchar(10) | NO   |     | NULL    |       |
+| category       | varchar(5)  | NO   |     | NULL    |       |
+| sub_category   | varchar(10) | NO   |     | NULL    |       |
+| original_price | double      | NO   |     | NULL    |       |
+| selling_price  | varchar(10) | NO   |     | NULL    |       |
+| product_stock  | varchar(20) | NO   |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from customer where bill_no>4;
++-------------+---------------+--------+------------------+---------+------------+---------+---------+-------+---------+
+| Customer_ID | customer_name | city   | email_id         | address | phone_no   | pincode | bill_no | state | country |
++-------------+---------------+--------+------------------+---------+------------+---------+---------+-------+---------+
+| c103        | chirag        | panvel | chirag@gmail.com | kc      | 5468795234 |  410206 |      10 | NM    | IndiA   |
++-------------+---------------+--------+------------------+---------+------------+---------+---------+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer where bill_no<4;
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city     | email_id         | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+| c101        | sushant       | panvel   | sus@gmail.com    | khandacolony | 7977054627 |  410206 |       0 | Raigad | USA     |
+| c102        | harsh         | panvel   | harsh@gmail.com  | khandacolony | 6451395265 |  410206 |       0 |        | USA     |
+| c104        | aryan         | pen      | aryan@gmail.com  | belavli      | 6459154365 |  410205 |       0 | Raigad | Indai   |
+| c105        | aditya        | rasayani | aditya@gmail.com | mohopada     | 4563236546 |  410205 |       0 | Raigad | INdia   |
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql>
+mysql> select * from customer where Customer_ID= 'sushant'and bill_no= 4;
+Empty set (0.02 sec)
+
+mysql> select * from customer where Customer_ID= 'sushant' or bill_no= 4;
+Empty set (0.00 sec)
+
+mysql> select * from customer where Customer_ID= 'sushant'and bill_no= 10;
+Empty set (0.00 sec)
+
+mysql> select * from customer where Customer_ID= 'sushant'OR bill_no= 10;
++-------------+---------------+--------+------------------+---------+------------+---------+---------+-------+---------+
+| Customer_ID | customer_name | city   | email_id         | address | phone_no   | pincode | bill_no | state | country |
++-------------+---------------+--------+------------------+---------+------------+---------+---------+-------+---------+
+| c103        | chirag        | panvel | chirag@gmail.com | kc      | 5468795234 |  410206 |      10 | NM    | IndiA   |
++-------------+---------------+--------+------------------+---------+------------+---------+---------+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from customer where Customer_ID between 'c102' and 'c104';
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city   | email_id         | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+| c102        | harsh         | panvel | harsh@gmail.com  | khandacolony | 6451395265 |  410206 |       0 |        | USA     |
+| c103        | chirag        | panvel | chirag@gmail.com | kc           | 5468795234 |  410206 |      10 | NM     | IndiA   |
+| c104        | aryan         | pen    | aryan@gmail.com  | belavli      | 6459154365 |  410205 |       0 | Raigad | Indai   |
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+3 rows in set (0.02 sec)
+
+mysql>  select * from customer where Customer_ID not between 'c102' and 'c104';
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city     | email_id         | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+| c101        | sushant       | panvel   | sus@gmail.com    | khandacolony | 7977054627 |  410206 |       0 | Raigad | USA     |
+| c105        | aditya        | rasayani | aditya@gmail.com | mohopada     | 4563236546 |  410205 |       0 | Raigad | INdia   |
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql>
+mysql> select * from customer where Customer_ID in ('c101', 'c103');
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city   | email_id         | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+| c101        | sushant       | panvel | sus@gmail.com    | khandacolony | 7977054627 |  410206 |       0 | Raigad | USA     |
+| c103        | chirag        | panvel | chirag@gmail.com | kc           | 5468795234 |  410206 |      10 | NM     | IndiA   |
++-------------+---------------+--------+------------------+--------------+------------+---------+---------+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer where Customer_ID not in ('c101', 'c103');
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city     | email_id         | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+| c102        | harsh         | panvel   | harsh@gmail.com  | khandacolony | 6451395265 |  410206 |       0 |        | USA     |
+| c104        | aryan         | pen      | aryan@gmail.com  | belavli      | 6459154365 |  410205 |       0 | Raigad | Indai   |
+| c105        | aditya        | rasayani | aditya@gmail.com | mohopada     | 4563236546 |  410205 |       0 | Raigad | INdia   |
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer where email_id is null;
+Empty set (0.00 sec)
+
+mysql> select * from customer where email_id is not null;
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+| Customer_ID | customer_name | city     | email_id         | address      | phone_no   | pincode | bill_no | state  | country |
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+| c101        | sushant       | panvel   | sus@gmail.com    | khandacolony | 7977054627 |  410206 |       0 | Raigad | USA     |
+| c102        | harsh         | panvel   | harsh@gmail.com  | khandacolony | 6451395265 |  410206 |       0 |        | USA     |
+| c103        | chirag        | panvel   | chirag@gmail.com | kc           | 5468795234 |  410206 |      10 | NM     | IndiA   |
+| c104        | aryan         | pen      | aryan@gmail.com  | belavli      | 6459154365 |  410205 |       0 | Raigad | Indai   |
+| c105        | aditya        | rasayani | aditya@gmail.com | mohopada     | 4563236546 |  410205 |       0 | Raigad | INdia   |
++-------------+---------------+----------+------------------+--------------+------------+---------+---------+--------+---------+
+5 rows in set (0.00 sec)4
