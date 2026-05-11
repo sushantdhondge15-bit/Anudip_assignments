@@ -1,0 +1,173 @@
+mysql> use aggregation;
+Database changed
+mysql> select * from product;
++------------+--------------+------------+---------------+----------------+-------+
+| product_id | product_name | category   | selling_price | original_price | stock |
++------------+--------------+------------+---------------+----------------+-------+
+| P101       | Table        | Furniture  |          8000 |           7500 |    14 |
+| P102       | Chair        | Furniture  |          2000 |           3000 |    10 |
+| P103       | Mobile       | Electronic |         20000 |          25000 |    50 |
+| P104       | Jeans        | Clothing   |          2000 |           1500 |    14 |
+| P105       | Webcam       | Electronic |          6000 |           5500 |    13 |
++------------+--------------+------------+---------------+----------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select sum(selling_price) from product;
++--------------------+
+| sum(selling_price) |
++--------------------+
+|              38000 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(selling_price) from product;
++--------------------+
+| avg(selling_price) |
++--------------------+
+|               7600 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select Max(stock) from product;
++------------+
+| Max(stock) |
++------------+
+|         50 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select Min(stock) from product;
++------------+
+| Min(stock) |
++------------+
+|         10 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from product;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.00 sec)
+
+mysql>  select * from product order by stock;
++------------+--------------+------------+---------------+----------------+-------+
+| product_id | product_name | category   | selling_price | original_price | stock |
++------------+--------------+------------+---------------+----------------+-------+
+| P102       | Chair        | Furniture  |          2000 |           3000 |    10 |
+| P105       | Webcam       | Electronic |          6000 |           5500 |    13 |
+| P101       | Table        | Furniture  |          8000 |           7500 |    14 |
+| P104       | Jeans        | Clothing   |          2000 |           1500 |    14 |
+| P103       | Mobile       | Electronic |         20000 |          25000 |    50 |
++------------+--------------+------------+---------------+----------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product order by stock desc;
++------------+--------------+------------+---------------+----------------+-------+
+| product_id | product_name | category   | selling_price | original_price | stock |
++------------+--------------+------------+---------------+----------------+-------+
+| P103       | Mobile       | Electronic |         20000 |          25000 |    50 |
+| P101       | Table        | Furniture  |          8000 |           7500 |    14 |
+| P104       | Jeans        | Clothing   |          2000 |           1500 |    14 |
+| P105       | Webcam       | Electronic |          6000 |           5500 |    13 |
+| P102       | Chair        | Furniture  |          2000 |           3000 |    10 |
++------------+--------------+------------+---------------+----------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product order by stock desc limit 3;
++------------+--------------+------------+---------------+----------------+-------+
+| product_id | product_name | category   | selling_price | original_price | stock |
++------------+--------------+------------+---------------+----------------+-------+
+| P103       | Mobile       | Electronic |         20000 |          25000 |    50 |
+| P101       | Table        | Furniture  |          8000 |           7500 |    14 |
+| P104       | Jeans        | Clothing   |          2000 |           1500 |    14 |
++------------+--------------+------------+---------------+----------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employees;
++-------------+---------------+------------+--------+
+| employee_id | employee_name | department | salary |
++-------------+---------------+------------+--------+
+| E101        | Sushant       | CEO        |   7000 |
+| E102        | Harsh         | HR         |   4000 |
+| E103        | Mayuresh      | Finance    |   3900 |
+| E104        | Chirag        | IT         |   5000 |
+| E105        | Aditya        | IT         |   5500 |
++-------------+---------------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select department,count(*) as total_employees from employees group by department;
++------------+-----------------+
+| department | total_employees |
++------------+-----------------+
+| CEO        |               1 |
+| HR         |               1 |
+| Finance    |               1 |
+| IT         |               2 |
++------------+-----------------+
+4 rows in set (0.00 sec)
+
+mysql> select department,sum(salary) as total_salary from employees group by department;
++------------+--------------+
+| department | total_salary |
++------------+--------------+
+| CEO        |         7000 |
+| HR         |         4000 |
+| Finance    |         3900 |
+| IT         |        10500 |
++------------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> select department, avg(salary) as average_salary from employees group by department;
++------------+----------------+
+| department | average_salary |
++------------+----------------+
+| CEO        |      7000.0000 |
+| HR         |      4000.0000 |
+| Finance    |      3900.0000 |
+| IT         |      5250.0000 |
++------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select department, salary, count(*) from employees group by department, salary;
++------------+--------+----------+
+| department | salary | count(*) |
++------------+--------+----------+
+| CEO        |   7000 |        1 |
+| HR         |   4000 |        1 |
+| Finance    |   3900 |        1 |
+| IT         |   5000 |        1 |
+| IT         |   5500 |        1 |
++------------+--------+----------+
+5 rows in set (0.00 sec)
+
+mysql>  select department, sum(salary) as total_salary from employees group by department having sum(salary)>4000;
++------------+--------------+
+| department | total_salary |
++------------+--------------+
+| CEO        |         7000 |
+| IT         |        10500 |
++------------+--------------+
+2 rows in set (0.00 sec)
+
+mysql> select department, sum(salary) as total_salary from employees group by department having sum(salary)>2000;
++------------+--------------+
+| department | total_salary |
++------------+--------------+
+| CEO        |         7000 |
+| HR         |         4000 |
+| Finance    |         3900 |
+| IT         |        10500 |
++------------+--------------+
+4 rows in set (0.00 sec)
+
+mysql> select department, AVG(salary) as average_salary from employees group by department having avg(salary)>5000;
++------------+----------------+
+| department | average_salary |
++------------+----------------+
+| CEO        |      7000.0000 |
+| IT         |      5250.0000 |
++------------+----------------+
+2 rows in set (0.00 sec)
